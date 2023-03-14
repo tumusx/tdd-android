@@ -7,6 +7,7 @@ import io.mockk.coEvery
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
@@ -17,12 +18,23 @@ class UseCaseTest {
     private val repository = mockk<Repository>(relaxed = true)
     private lateinit var useCase: UseCase
 
+    val listCars = listOf<Cars>(
+        Cars("hb20", 2022, 150, false, 120000),
+        Cars("hrv", 2023, 220, false, 200000)
+    )
 
     private fun car(modelCar: String): Cars = Cars(modelCar, 2022, 150, false, 120000)
 
     @Before
     fun setup() {
         useCase = UseCase(repository)
+    }
+
+    @Test
+    fun fetchData(): Unit = runBlocking {
+        useCase.getAllCars().collect{
+            assertEquals(StateRequest.SuccessGetItems(listCars), it)
+        }
     }
 
     @Test

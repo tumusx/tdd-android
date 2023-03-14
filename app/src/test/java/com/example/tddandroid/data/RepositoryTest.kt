@@ -1,6 +1,7 @@
 package com.example.tddandroid.data
 
 import com.example.tddandroid.data.model.Cars
+import com.example.tddandroid.listCars
 import io.mockk.*
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
@@ -11,10 +12,6 @@ class RepositoryTest {
     private val database = mockk<DatabaseApplication>(relaxed = true)
     lateinit var repository: Repository
 
-    val listCars = listOf<Cars>(
-        Cars("hb20", 2022, 150, false, 120000),
-        Cars("hrv", 2023, 220, false, 200000)
-    )
 
     @Before
     fun setup() {

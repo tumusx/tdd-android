@@ -13,12 +13,18 @@ class UseCase(private val repository: Repository) {
         const val MIN_CHARS_MODEL_CAR = 5
     }
 
+    suspend fun getAllCars(): Flow<StateRequest> = flow {
+        repository.getAllItems().collect {
+            emit(it)
+        }
+    }
+
     suspend fun insertCars(cars: Cars): Flow<StateRequest> = flow {
         if (cars.modelCar.count() < MIN_CHARS_MODEL_CAR) {
-           emit(StateRequest.Error("Tamanho do modelo do carro incompatível com a regra de 5 caracteres. Tente com um nome maior."))
+            emit(StateRequest.Error("Tamanho do modelo do carro incompatível com a regra de 5 caracteres. Tente com um nome maior."))
         } else {
             repository.insertItems(cars).collect { state ->
-               val result = if (state is StateRequest.Error) {
+                val result = if (state is StateRequest.Error) {
                     StateRequest.Error("Ops... Aconteceu um erro inesperado.")
                 } else {
                     StateRequest.SuccessInsert
