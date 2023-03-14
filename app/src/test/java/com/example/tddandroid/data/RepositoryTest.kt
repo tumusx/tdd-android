@@ -1,11 +1,7 @@
-package com.example.tddandroid
+package com.example.tddandroid.data
 
-import com.example.tddandroid.data.DatabaseApplication
-import com.example.tddandroid.data.Repository
-import com.example.tddandroid.data.StateRequest
 import com.example.tddandroid.data.model.Cars
 import io.mockk.*
-import io.mockk.MockKAnnotations.init
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Before
