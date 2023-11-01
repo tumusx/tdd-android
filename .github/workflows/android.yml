@@ -39,3 +39,6 @@ jobs:
         with:
           name: jacoco-report
           path: htmlReport
+
+      - name: Run Detekt
+        run: ./gradlew detekt

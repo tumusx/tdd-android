@@ -4,8 +4,6 @@ import com.example.tddandroid.data.Repository
 import com.example.tddandroid.data.StateRequest
 import com.example.tddandroid.data.model.Cars
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.flow
 
 class UseCase(private val repository: Repository) {

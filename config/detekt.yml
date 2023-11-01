@@ -1,0 +1,35 @@
+style:
+  active: true
+  UnusedImports:
+    active: true
+  NewLineAtEndOfFile:
+    active: false
+  MaxLineLength:
+    active: false
+  ForbiddenComment:
+    active: true
+    values: [ 'TODO:', 'FIXME:', 'STOPSHIP:' ]
+
+
+naming:
+  active: true
+  ClassNaming:
+    active: true
+    classPattern: '^[A-Z][a-zA-Z]*$'
+comments:
+  active: true
+
+complexity:
+  active: true
+
+exceptions:
+  active: false
+
+formatting:
+  active: true
+
+performance:
+  active: true
+
+potential-bugs:
+  active: true

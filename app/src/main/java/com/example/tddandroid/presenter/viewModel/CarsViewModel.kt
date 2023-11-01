@@ -6,12 +6,9 @@ import com.example.tddandroid.data.StateRequest
 import com.example.tddandroid.data.model.Cars
 import com.example.tddandroid.domain.UseCase
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 
 data class StateUi(
     var errorMessage: String? = null,

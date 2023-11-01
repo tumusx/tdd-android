@@ -3,12 +3,8 @@ package com.example.tddandroid.domain
 import com.example.tddandroid.data.Repository
 import com.example.tddandroid.data.StateRequest
 import com.example.tddandroid.data.model.Cars
-import io.mockk.coEvery
-import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Before

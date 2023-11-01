@@ -1,6 +1,5 @@
 package com.example.tddandroid.data
 
-import com.example.tddandroid.data.model.Cars
 import com.example.tddandroid.listCars
 import io.mockk.*
 import kotlinx.coroutines.runBlocking

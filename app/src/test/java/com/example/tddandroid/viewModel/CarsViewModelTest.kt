@@ -8,12 +8,11 @@ import com.example.tddandroid.presenter.viewModel.StateUi
 import io.mockk.mockk
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.StandardTestDispatcher
-import kotlinx.coroutines.test.TestScope
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Ignore
 import org.junit.Rule
-import org.junit.Test
+
 @OptIn(ExperimentalCoroutinesApi::class)
 class CarsViewModelTest {
     private lateinit var carsViewModel: CarsViewModel

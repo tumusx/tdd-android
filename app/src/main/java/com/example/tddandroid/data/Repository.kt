@@ -2,9 +2,7 @@ package com.example.tddandroid.data
 
 import com.example.tddandroid.data.model.Cars
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.runBlocking
 
 class Repository(private val databaseApplication: DatabaseApplication) {
 
