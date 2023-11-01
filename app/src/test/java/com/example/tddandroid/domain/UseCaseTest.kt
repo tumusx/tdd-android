@@ -39,7 +39,7 @@ class UseCaseTest {
         useCase.insertCars(car("hb20")).collect {
         assertEquals(
             StateRequest.Error("Tamanho do modelo do carro incompatível com a regra de 5 caracteres. Tente com um nome maior."),
-            ""
+            it
         )
     }
 }

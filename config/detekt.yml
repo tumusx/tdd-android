@@ -8,7 +8,7 @@ style:
     active: false
   ForbiddenComment:
     active: true
-    values: [ 'TODO:', 'FIXME:', 'STOPSHIP:' ]
+    values: [ 'TODO:', 'FIXME:' ]
 
 
 naming:
