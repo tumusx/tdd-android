@@ -32,7 +32,7 @@ jobs:
         run: chmod +x gradlew
 
       - name: Run unit tests and generate Jacoco report
-        run: ./gradlew clean testDebugUnitTest jacocoTestReport || echo "Test failed" > error.log
+        run: ./gradlew clean testDebugUnitTest jacocoTestReport
 
       - name: Upload JaCoCo report to GitHub Artifacts
         uses: actions/upload-artifact@v2
@@ -50,15 +50,9 @@ jobs:
         if: always()
         run: |
           CONTENT=$(cat review_info.txt)
-          
-          # Check if error.log exists and append its content to the message
-          if [[ -f error.log ]]; then
-            ERROR_MSG=$(cat error.log)
-            CONTENT="$CONTENT\n\nError: $ERROR_MSG"
-          fi
-          
-          echo "Sending Message: $CONTENT"
+          echo "Sending Success Message: $CONTENT"
           JSON_STRING=$( jq -n \
                           --arg msg "$CONTENT" \
                           '{content: $msg}' )
           curl -X POST -H "Content-Type: application/json" -d "$JSON_STRING" ${{ secrets.DISCORD_WEBHOOK_URL }}
+
