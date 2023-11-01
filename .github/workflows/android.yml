@@ -48,6 +48,7 @@ jobs:
         if: success()
         run: |
           CONTENT=$(cat review_info.txt)
+          echo "Sending Message: $CONTENT"  # Vamos imprimir o conteúdo para depuração
           JSON_STRING=$( jq -n \
                           --arg msg "$CONTENT" \
                           '{content: $msg}' )

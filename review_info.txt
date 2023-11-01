@@ -1,2 +1,3 @@
-Review Link: https://github.com/tumusx/tdd-android/pull/1
-Nome: @tumusx
+<@713830361544785936>
+link: https://github.com/tumusx/tdd-android/pull/1
+reviewer: Murillo Alves
