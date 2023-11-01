@@ -47,6 +47,7 @@ jobs:
         run: sudo apt-get install jq
 
       - name: Notify Discord
+        if: always()
         run: |
           CONTENT=$(cat review_info.txt)
           echo "Sending Success Message: $CONTENT"
