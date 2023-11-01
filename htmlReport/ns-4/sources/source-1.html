@@ -1,0 +1,241 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > UseCase</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.example.tddandroid.domain</a>
+</div>
+
+<h1>Coverage Summary for Class: UseCase (com.example.tddandroid.domain)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">UseCase</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">UseCase$Companion</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">UseCase$getAllCars$2</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">UseCase$getAllCars$2$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">UseCase$insertCars$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    75%
+  </span>
+  <span class="absValue">
+    (3/4)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">UseCase$insertCars$1$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    75%
+  </span>
+  <span class="absValue">
+    (6/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    60%
+  </span>
+  <span class="absValue">
+    (9/15)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.example.tddandroid.domain
+&nbsp;
+&nbsp;import com.example.tddandroid.data.Repository
+&nbsp;import com.example.tddandroid.data.StateRequest
+&nbsp;import com.example.tddandroid.data.model.Cars
+&nbsp;import kotlinx.coroutines.flow.Flow
+&nbsp;import kotlinx.coroutines.flow.collect
+&nbsp;import kotlinx.coroutines.flow.collectLatest
+&nbsp;import kotlinx.coroutines.flow.flow
+&nbsp;
+<b class="fc">&nbsp;class UseCase(private val repository: Repository) {</b>
+<b class="fc">&nbsp;    companion object {</b>
+&nbsp;        const val MIN_CHARS_MODEL_CAR = 5
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    suspend fun getAllCars(): Flow&lt;StateRequest&gt; = flow {</b>
+<b class="fc">&nbsp;        repository.getAllItems().collect {</b>
+<b class="nc">&nbsp;            emit(it)</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;     fun insertCars(cars: Cars): Flow&lt;StateRequest&gt; = flow {</b>
+<b class="fc">&nbsp;        if (cars.modelCar.count() &lt; MIN_CHARS_MODEL_CAR) {</b>
+<b class="fc">&nbsp;            emit(StateRequest.Error(&quot;Tamanho do modelo do carro incompatível com a regra de 5 caracteres. Tente com um nome maior.&quot;))</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            repository.insertItems(cars).collect { state -&gt;</b>
+<b class="nc">&nbsp;                val result = if (state is StateRequest.Error) {</b>
+<b class="nc">&nbsp;                    StateRequest.Error(&quot;Ops... Aconteceu um erro inesperado.&quot;)</b>
+&nbsp;                } else {
+<b class="nc">&nbsp;                    StateRequest.SuccessInsert</b>
+&nbsp;                }
+<b class="nc">&nbsp;                emit(result)</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-11-01 12:01</div>
+</div>
+</body>
+</html>

@@ -19,7 +19,7 @@ class UseCase(private val repository: Repository) {
         }
     }
 
-    suspend fun insertCars(cars: Cars): Flow<StateRequest> = flow {
+     fun insertCars(cars: Cars): Flow<StateRequest> = flow {
         if (cars.modelCar.count() < MIN_CHARS_MODEL_CAR) {
             emit(StateRequest.Error("Tamanho do modelo do carro incompatível com a regra de 5 caracteres. Tente com um nome maior."))
         } else {

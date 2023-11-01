@@ -1,0 +1,142 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > StateUi</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.example.tddandroid.presenter.viewModel</a>
+</div>
+
+<h1>Coverage Summary for Class: StateUi (com.example.tddandroid.presenter.viewModel)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">StateUi</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.example.tddandroid.presenter.viewModel
+&nbsp;
+&nbsp;import androidx.lifecycle.ViewModel
+&nbsp;import androidx.lifecycle.viewModelScope
+&nbsp;import com.example.tddandroid.data.StateRequest
+&nbsp;import com.example.tddandroid.data.model.Cars
+&nbsp;import com.example.tddandroid.domain.UseCase
+&nbsp;import kotlinx.coroutines.CoroutineDispatcher
+&nbsp;import kotlinx.coroutines.GlobalScope
+&nbsp;import kotlinx.coroutines.flow.MutableStateFlow
+&nbsp;import kotlinx.coroutines.flow.StateFlow
+&nbsp;import kotlinx.coroutines.flow.collect
+&nbsp;import kotlinx.coroutines.launch
+&nbsp;import kotlinx.coroutines.runBlocking
+&nbsp;
+<b class="nc">&nbsp;data class StateUi(</b>
+<b class="nc">&nbsp;    var errorMessage: String? = null,</b>
+<b class="nc">&nbsp;    var loading: Boolean = true,</b>
+<b class="nc">&nbsp;    var success: List&lt;Cars&gt;? = null</b>
+&nbsp;)
+&nbsp;
+&nbsp;class CarsViewModel(private val useCase: UseCase,
+&nbsp;private val coroutineDispatcher: CoroutineDispatcher) : ViewModel() {
+&nbsp;    private val _stateUi: MutableStateFlow&lt;StateUi&gt; = MutableStateFlow(StateUi(loading = true))
+&nbsp;    val stateUi: StateFlow&lt;StateUi&gt; = _stateUi
+&nbsp;
+&nbsp;    fun fetchData() {
+&nbsp;        viewModelScope.launch(coroutineDispatcher) {
+&nbsp;            useCase.getAllCars().collect {
+&nbsp;                if (it.messageError.isNullOrEmpty()) {
+&nbsp;                    _stateUi.value = StateUi(errorMessage = it.messageError)
+&nbsp;                } else {
+&nbsp;                    _stateUi.value =
+&nbsp;                        StateUi(success = (it as StateRequest.SuccessGetItems).copy().listItems)
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-11-01 12:01</div>
+</div>
+</body>
+</html>

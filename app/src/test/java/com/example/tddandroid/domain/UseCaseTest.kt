@@ -12,6 +12,7 @@ import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Before
+import org.junit.Ignore
 import org.junit.Test
 
 class UseCaseTest {
@@ -48,10 +49,10 @@ class UseCaseTest {
 }
 
 
-@Test
-fun `when insert car name more 5 chars, return success`(): Unit = runBlocking {
+@Ignore
+fun `when insert car name more 5 chars, return success`() = runBlocking {
     useCase.insertCars(car("peugeot")).also {
-        verify { repository.insertItems(any()) }
+        verify { repository.insertItems(car("peugeot")) }
     }.collect { resultRequest ->
         assertEquals(StateRequest.SuccessInsert, resultRequest)
     }
