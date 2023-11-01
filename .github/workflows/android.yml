@@ -42,7 +42,14 @@ jobs:
 
       - name: Run Detekt
         run: ./gradlew detekt
+      - name: Install jq
+        run: sudo apt-get install jq
       - name: Notify Discord
         if: success()
         run: |
-          curl -X POST -H "Content-Type: application/json" -d '{"content":"Pronto para revisão de código!"}' ${{ secrets.DISCORD_WEBHOOK_URL }}
+          CONTENT=$(cat review_info.txt)
+          JSON_STRING=$( jq -n \
+                          --arg msg "$CONTENT" \
+                          '{content: $msg}' )
+          curl -X POST -H "Content-Type: application/json" -d "$JSON_STRING" ${{ secrets.DISCORD_WEBHOOK_URL }}
+        shell: bash
