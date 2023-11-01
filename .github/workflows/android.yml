@@ -46,8 +46,7 @@ jobs:
       - name: Install jq
         run: sudo apt-get install jq
 
-      - name: Notify Discord on Success
-        if: success()
+      - name: Notify Discord
         run: |
           CONTENT=$(cat review_info.txt)
           echo "Sending Success Message: $CONTENT"
@@ -55,16 +54,4 @@ jobs:
                           --arg msg "$CONTENT" \
                           '{content: $msg}' )
           curl -X POST -H "Content-Type: application/json" -d "$JSON_STRING" ${{ secrets.DISCORD_WEBHOOK_URL }}
-
-      - name: Notify Discord on Error
-        if: failure()
-        run: |
-          ERROR_MSG=$(cat error.log)
-          FINAL_MSG="Ocorreu o seguinte erro na pipeline: $ERROR_MSG"
-          echo "Sending Error Message: $FINAL_MSG"
-          JSON_STRING=$( jq -n \
-                          --arg msg "$FINAL_MSG" \
-                          '{content: $msg}' )
-          curl -X POST -H "Content-Type: application/json" -d "$JSON_STRING" ${{ secrets.DISCORD_WEBHOOK_URL }}
-        shell: bash
 
