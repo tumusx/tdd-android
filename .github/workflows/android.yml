@@ -12,19 +12,13 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+
       - name: Set up JDK
         uses: actions/setup-java@v3
         with:
           java-version: '11'
           distribution: 'temurin'
           cache: gradle
-
-      - name: Grant execute permission for gradlew
-        run: chmod +x gradlew
-      - name: Build with Gradle
-        run: ./gradlew build
-      - name: Run Tests with Gradle
-        run: ./gradlew test
 
       - name: Cache Gradle dependencies
         uses: actions/cache@v2
@@ -34,10 +28,14 @@ jobs:
           restore-keys: |
             gradle-${{ runner.os }}-
 
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      - name: Run unit tests and generate Jacoco report
+        run: ./gradlew clean testDebugUnitTest jacocoTestReport
+
       - name: Upload JaCoCo report to GitHub Artifacts
         uses: actions/upload-artifact@v2
         with:
           name: jacoco-report
-          path: build/customJacocoReportDir/
-      - name: Run unit tests and generate Jacoco report
-        run: ./gradlew clean testDebugUnitTest jacocoTestReport
+          path: htmlReport
