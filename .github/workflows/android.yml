@@ -42,3 +42,7 @@ jobs:
 
       - name: Run Detekt
         run: ./gradlew detekt
+      - name: Notify Discord
+        if: success()
+        run: |
+          curl -X POST -H "Content-Type: application/json" -d '{"content":"Pronto para revisão de código!"}' ${{ secrets.DISCORD_WEBHOOK_URL }}
