@@ -26,9 +26,6 @@ jobs:
       - name: Run Tests with Gradle
         run: ./gradlew test
 
-      - name: Generate JaCoCo Report
-        run: ./gradlew jacocoTestReport
-
       - name: Cache Gradle dependencies
         uses: actions/cache@v2
         with:
