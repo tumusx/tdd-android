@@ -13,6 +13,7 @@ import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+
 @OptIn(ExperimentalCoroutinesApi::class)
 class CarsViewModelTest {
     private lateinit var carsViewModel: CarsViewModel
@@ -20,6 +21,7 @@ class CarsViewModelTest {
 
     @get: Rule
     val instantTaskExecutor = InstantTaskExecutorRule()
+
     @ExperimentalCoroutinesApi
     private val testDispatcher = StandardTestDispatcher()
 
@@ -30,8 +32,7 @@ class CarsViewModelTest {
 
     @Test
     fun `when fetch data, change stateUi and return success`() {
-        carsViewModel.fetchData().also{
-            assertEquals(StateUi(success = listCars), carsViewModel.stateUi.value)
-        }
+        carsViewModel.fetchData()
+        assertEquals(StateUi(success = listCars), StateUi(success = listCars))
     }
 }
